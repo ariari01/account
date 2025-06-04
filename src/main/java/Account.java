@@ -1,6 +1,6 @@
 public class Account {
-    private int balance;
-    private double rate = 0.10;
+    int balance;
+    int interestPer = 0;
 
     public Account(int money) {
         this.balance = money;
@@ -18,16 +18,30 @@ public class Account {
         balance -= money;
     }
 
-    public void compoundInterest(int years) {
-        balance = (int)(balance * Math.pow(1 + rate, years));
+    public void applyInterestForFive() {
+        setInterestPer(5);
+        applyInterest();
     }
 
-    public void modifyAccountRate(double rate) {
-        this.rate = rate;
+    public void setInterestPer(int interrestPer) {
+        this.interestPer = interrestPer;
     }
 
-    public void appliyInterestForFive() {
-        int r = (int)(balance * 0.05);
-        balance += r;
+    private int getInterest(int balance) {
+        double rate = 0.01 * interestPer;
+        return (int)(balance * rate);
+    }
+
+    public void applyInterest() {
+        int interest = getInterest(balance);
+        balance += interest;
+    }
+
+    public int predictBalance(int targetYear) {
+        int predictBalance = balance;
+        for (int year = 1; year <= targetYear; year++) {
+            predictBalance += getInterest(predictBalance);
+        }
+        return predictBalance;
     }
 }
