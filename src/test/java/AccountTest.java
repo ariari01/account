@@ -38,6 +38,13 @@ class AccountTest {
     }
 
     @Test
+    void applyFivePercentInterest() {
+        account.appliyInterestForFive();
+        int ret = account.getBalance();
+        assertEquals(10500, ret);
+    }
+
+    @Test
     void compoundInterestAndConfirmation() {
         account.compoundInterest( 1);
         double ret = account.getBalance();

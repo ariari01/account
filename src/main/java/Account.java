@@ -1,28 +1,33 @@
 public class Account {
-    private double balance;
+    private int balance;
     private double rate = 0.10;
 
     public Account(int money) {
         this.balance = money;
     }
 
-    public double getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void deposit(double money) {
+    public void deposit(int money) {
         balance += money;
     }
 
-    public void withdraw(double money) {
+    public void withdraw(int money) {
         balance -= money;
     }
 
     public void compoundInterest(int years) {
-        balance = balance * Math.pow(1 + rate, years);
+        balance = (int)(balance * Math.pow(1 + rate, years));
     }
 
     public void modifyAccountRate(double rate) {
         this.rate = rate;
+    }
+
+    public void appliyInterestForFive() {
+        int r = (int)(balance * 0.05);
+        balance += r;
     }
 }
