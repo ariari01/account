@@ -1,6 +1,5 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountTest {
@@ -13,50 +12,39 @@ class AccountTest {
     }
 
     @Test
-    void createAccountTest() {
-        assertNotNull(account);
-    }
-
-    @Test
     void createAccountInit10000won() {
-        double ret = account.getBalance();
-        assertEquals(10000, ret);
+        assertEquals(10000, account.getBalance());
     }
 
     @Test
     void depositAndConfirmation() {
         account.deposit(400);
-        double ret = account.getBalance();
-        assertEquals(10400, ret);
+        assertEquals(10400, account.getBalance());
     }
 
     @Test
     void withdrawAndConfirmation() {
         account.withdraw(600);
-        double ret = account.getBalance();
-        assertEquals(9400, ret);
+        assertEquals(9400, account.getBalance());
     }
 
     @Test
-    void compoundInterestAndConfirmation() {
-        account.compoundInterest( 1);
-        double ret = account.getBalance();
-        assertEquals(11000, ret);
+    void applyFivePercentInterest() {
+        account.applyInterestForFive();
+        assertEquals(10500, account.getBalance());
     }
 
     @Test
-    void getAccountRate() {
-        account.modifyAccountRate(0.10);
-        account.compoundInterest( 1);
-        double ret = account.getBalance();
-        assertEquals(11000, ret);
+    void setterInterest() {
+        account.setInterestPer(5);
+        account.applyInterest();
+        assertEquals(10500, account.getBalance());
     }
 
     @Test
-    void getAccountRate2years() {
-        account.modifyAccountRate(0.20);
-        account.compoundInterest( 2);
-        double ret = account.getBalance();
-        assertEquals(14400, ret);
+    void predictNYearInterest() {
+        account.setInterestPer(10);
+        int ret = account.predictBalance(3);
+        assertEquals(13310, ret);
     }
 }
