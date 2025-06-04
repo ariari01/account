@@ -44,4 +44,8 @@ public class Account {
         }
         return predictBalance;
     }
+
+    void TestLog () {
+        System.out.println("Test");
+    }
 }
